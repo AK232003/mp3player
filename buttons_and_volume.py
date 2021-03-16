@@ -68,7 +68,7 @@ def Stop():
     
 # Making playlist of songs
 
-playlist = tk.Listbox(mp3, bg="orange", fg="White", width=70, selectbackground='DarkGreen')
+playlist = tk.Listbox(mp3, bg="orange", fg="White", width=40, selectbackground='DarkGreen')
 playlist.pack(pady=30)
 
 # Defining button images of our mp3 player 

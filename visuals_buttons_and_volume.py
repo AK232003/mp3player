@@ -92,7 +92,7 @@ def add_many_songs():
 
 def Help():
     # Showinginfo is a command to display written things on Screen inside tkinter.messagebox, whose syntax is (Label, Message to be shown)
-    showinfo("MP3 PLAYER", "Contact HEET VASANI For Doubts Related To This Code")   
+    showinfo("MP3 PLAYER", "Contact ESS112-GROUP_1 For Doubts Related To This Code")   
 # Defining About Button's Function
 
 def About():
@@ -266,7 +266,7 @@ remove_songs.add_command(label="Remove A Song", command=remove_song)
 remove_songs.add_command(label="Remove All Songs", command=remove_all_songs)
 
 
-    # Adding About Option To Main Menu
+# Adding About Option To Main Menu
 about = tk.Menu(Options_list)
 about.add_command(label='About', command=About)
 Options_list.add_cascade(label="About", menu=about)

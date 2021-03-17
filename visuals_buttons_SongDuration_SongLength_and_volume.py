@@ -10,7 +10,8 @@ from mutagen.mp3 import MP3
 # Defining Basic Structure (Looks, Fonts,etc.. type)
 mp3= tk.Tk() # Defining mp3 as Tk object
 mp3.title("ESS112_Team1-Python_project") # Adding main title to MP3 PLAYER
-mp3.iconbitmap("e:/Python_project/Images/MP3.ico") # Setting icon for MP3 PLAYER
+x=tk.PhotoImage(file="icons/MP3.png")
+mp3.iconphoto(False,x) # Setting icon for MP3 PLAYER
 mp3.geometry("500x450") # Setting The Size it shows by default widthxheight
 mp3.maxsize(500, 450) # Setting Max Size Above Which Our MP3 PLAYER can't be stretched in (width, height)
 mp3.option_add('*Font', '5') # Changing Font Size
@@ -213,11 +214,11 @@ playlist.pack(pady=30) # pady means padding in y to make it look properly aligne
 
 # Defining button images of our mp3 player 
 
-forward_image = tk.PhotoImage(file="e:/Python_project/Images/forward.png")
-back_image = tk.PhotoImage(file="e:/Python_project/Images/back.png")
-stop_image = tk.PhotoImage(file="e:/Python_project/Images/stop.png")
-pause_image = tk.PhotoImage(file="e:/Python_project/Images/pause.png")
-play_image = tk.PhotoImage(file="e:/Python_project/Images/play.png")
+forward_image = tk.PhotoImage(file="icons/forward.png")
+back_image = tk.PhotoImage(file="icons/back.png")
+stop_image = tk.PhotoImage(file="icons/stop.png")
+pause_image = tk.PhotoImage(file="icons/pause.png")
+play_image = tk.PhotoImage(file="icons/play.png")
 
 
 #Creating Frame to add buttons to align them in in one line in centre of screen using pack
@@ -262,12 +263,10 @@ Options_list.add_cascade(label="Remove", menu=remove_songs) # Allowing to access
 
     # Adding "Remove One Song" Option To "Remove" Menu
 remove_songs.add_command(label="Remove A Song", command=remove_song)
-
-     # Adding "Remove All Songs" Option To "Remove" Menu
+# Adding "Remove All Songs" Option To "Remove" Menu
 remove_songs.add_command(label="Remove All Songs", command=remove_all_songs)
 
-
-    # Adding About Option To Main Menu
+# Adding About Option To Main Menu
 about = tk.Menu(Options_list)
 about.add_command(label='About', command=About)
 Options_list.add_cascade(label="About", menu=about)
@@ -278,10 +277,9 @@ help1.add_command(label='Help', command=Help)
 Options_list.add_cascade(label="Help", menu=help1)
 
 # Creating Status Bar
-    # Relief is border-type, ipady is internal padding in y
+# Relief is border-type, ipady is internal padding in y
 status_bar = tk.Label(mp3, text='Song Is Being Played   ', borderwidth=1, relief=tk.SUNKEN, anchor=tk.E)
 status_bar.pack(fill=tk.X, side=tk.BOTTOM, ipady=3)
-
 
 # Entering in event loop and allowing all the data we entered above to appear on screen
 mp3.mainloop()

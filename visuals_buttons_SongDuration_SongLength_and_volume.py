@@ -12,6 +12,7 @@ mp3= tk.Tk() # Defining mp3 as Tk object
 mp3.title("ESS112_Team1-Python_project") # Adding main title to MP3 PLAYER
 mp3.iconbitmap("e:/Python_project/Images/MP3.ico") # Setting icon for MP3 PLAYER
 mp3.geometry("500x450") # Setting The Size it shows by default widthxheight
+mp3.maxsize(500, 450) # Setting Max Size Above Which Our MP3 PLAYER can't be stretched in (width, height)
 mp3.option_add('*Font', '5') # Changing Font Size
 mp3['bg'] = 'white' # Changing Overall background colour
 

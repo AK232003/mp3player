@@ -12,3 +12,5 @@ We were inspired to do this project as now-a-days people want to learn something
 Also, people will ENJOY Listening to music on MP3 PLAYER Made by them own.
 
 So, We are really glad to present this our project in front of you via this repository (Have all required files).
+
+So, learn with fun and tell us if there's something to improve.

@@ -279,7 +279,7 @@ Options_list.add_cascade(label="Help", menu=help1)
 
 # Creating Status Bar
 # Relief is border-type, ipady is internal padding in y
-status_bar = tk.Label(mp3, text='Song Is Being Played   ', borderwidth=1, relief=tk.SUNKEN, anchor=tk.E)
+status_bar = tk.Label(mp3, text=' ENJOY MUSIC  ', borderwidth=1, relief=tk.SUNKEN, anchor=tk.E)
 status_bar.pack(fill=tk.X, side=tk.BOTTOM, ipady=3)
 
 # Entering in event loop and allowing all the data we entered above to appear on screen

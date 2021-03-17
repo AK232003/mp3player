@@ -1,6 +1,9 @@
 #VOLUME IMAGES
 #Volumetric_graphs
 #Make sure that the images are in the current directory
+from tkinter import *
+import pygame
+
 global vol0
 global vol25
 global vol50

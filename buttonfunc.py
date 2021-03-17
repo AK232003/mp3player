@@ -8,18 +8,6 @@ import mutagen.mp3
 from mutagen.mp3 import MP3
 import tkinter.ttk as ttk
 
-
-
-# Defining Basic Structure (Looks, Fonts,etc.. type)
-mp3= tk.Tk() # Defining mp3 as Tk object
-mp3.title("ESS112_Team1-Python_project") # Adding main title to MP3 PLAYER
-mp3.iconbitmap("e:/Python_project/Images/MP3.ico") # Setting icon for MP3 PLAYER
-mp3.geometry("600x430") # Setting The Size it shows by default widthxheigth
-mp3.maxsize(600, 430) # Setting Max Size Above Which Our MP3 PLAYER can't be stretched out (width, height)
-mp3.minsize(600, 15) # Setting Min Size Below Which Our MP3 PLAYER can't be stretched in (width, height)
-mp3.option_add('*Font', '5') # Changing Font Size
-mp3['bg'] = 'white' # Changing Overall background colour to white of mp3 frame
-
 #To start pygame mixer which is used to play music here 
 pygame.mixer.init()
 
@@ -265,110 +253,48 @@ def Stop():
     
     
 #Creating Master Frame in which our frame (including all buttons and status toolbar, header ) and volume slider will be there
+def main(mp3):
+    master_frame = tk.Frame(mp3)
+    master_frame.pack(pady = 30)# pady means padding in y to make it look properly aligned and attractive (same for padx in x direction so not explaining it everywhere)
+    master_frame['bg'] = 'white' # Changing Overall background colour to white of master frame
+
+
+    # Making playlist of songs
+    global playlist
+    global status_bar
+    global volume_slider_label
+    global volume_slider
+    playlist = tk.Listbox(master_frame, bg="orange", fg="White", width=100,height=20, selectbackground='DarkGreen') # Putting our playlist in Master frame
+    playlist.grid(row=0, column=0) # Assigning row and column as 0 as it reprents first element of master _current_frames
     
-master_frame = tk.Frame(mp3)
-master_frame.pack(pady = 30)# pady means padding in y to make it look properly aligned and attractive (same for padx in x direction so not explaining it everywhere)
-master_frame['bg'] = 'white' # Changing Overall background colour to white of master frame
+    # Defining button images of our mp3 player 
 
 
-# Making playlist of songs
-
-playlist = tk.Listbox(master_frame, bg="orange", fg="White", width=40, selectbackground='DarkGreen') # Putting our playlist in Master frame
-playlist.grid(row=0, column=0) # Assigning row and column as 0 as it reprents first element of master _current_frames
-
-# Defining button images of our mp3 player 
-
-forward_image = tk.PhotoImage(file="e:/Python_project/Images/forward.png")
-back_image = tk.PhotoImage(file="e:/Python_project/Images/back.png")
-stop_image = tk.PhotoImage(file="e:/Python_project/Images/stop.png")
-pause_image = tk.PhotoImage(file="e:/Python_project/Images/pause.png")
-play_image = tk.PhotoImage(file="e:/Python_project/Images/play.png")
+    #Creating Frame to add buttons to align them in in one line in centre of screen using pack
+    # Creating Volume Label Frame To Add Volume Slider here to make it look attractive in box and putting volume_frame in master_frame
+    volume_frame = tk.LabelFrame(master_frame, text="Volume")
+        # Assigning Volume Part next to mp3_frame of Ours using row=0 and col=1
+    volume_frame.grid(row=0, column=1, padx=8)
 
 
-#Creating Frame to add buttons to align them in in one line in centre of screen using pack
+    # Creating Status Bar
+        # Relief is border-type, ipady is internal padding in y
+    status_bar = tk.Label(mp3, text='ENJOY MUSIC  ', borderwidth=1, relief=tk.SUNKEN, anchor=tk.E)
+    status_bar.pack(fill=tk.X, side=tk.BOTTOM, ipady=3)
 
-    # Putting Buttons in master frame and griding it inside master frame properly
-Buttons_frame = tk.Frame(master_frame, bg='white') # Did bgcolor of buttons as white
-    # Putting buttons frame just below playlist frame by doing row=1 and col=0
-Buttons_frame.grid(row=1, column=0) 
-
-
-# Creating Volume Label Frame To Add Volume Slider here to make it look attractive in box and putting volume_frame in master_frame
-volume_frame = tk.LabelFrame(master_frame, text="Volume")
-    # Assigning Volume Part next to mp3_frame of Ours using row=0 and col=1
-volume_frame.grid(row=0, column=1, padx=30)
-
-
-# Create Buttons using images defined above by aligning them in one single line
-
-back = tk.Button(Buttons_frame, image=back_image, borderwidth=0, command=Back)
-forward = tk.Button(Buttons_frame, image=forward_image, borderwidth=0, command=Forward)
-play = tk.Button(Buttons_frame, image=play_image, borderwidth=0, command=Play)
-pause = tk.Button(Buttons_frame, image=pause_image, borderwidth=0, command=lambda: Pause(Check))
-stop = tk.Button(Buttons_frame, image=stop_image, borderwidth=0, command=Stop)
-
-back.grid(row=0, column=0, padx=8)
-forward.grid(row=0, column=4, padx=8) 
-play.grid(row=0, column=1, padx=8) 
-pause.grid(row=0, column=2, padx=8)
-stop.grid(row=0, column=3, padx=8)
-
-# Create Options Menu Structure
-Options_list = tk.Menu(mp3)
-mp3.config(menu=Options_list)
-
-# Adding Options to Menu Structure
-
-# Adding "Add" Option To Main Menu
-add_songs = tk.Menu(Options_list) # Making a new menu named add_songs inside Options_list menu
-Options_list.add_cascade(label="Add", menu=add_songs) # Allowing to access all contents of add menu to Options_list 
-    
-    # Adding "Add One Song" Option To "Add" Menu
-add_songs.add_command(label="Add A Song", command=add_song) # Giving command to add_song to what to do
-
-    # Adding Add Many Songs Option To Add Menu
-add_songs.add_command(label="Add Many Songs", command=add_many_songs)  # Giving command to add_many_songs to what to do
+    # Creating Volume Slider To increase and decrease volume and putting it in volume frame to look more great 
+        # Orienting it in vertical direction 
+        # Did 0 to 1 as volume in pygame will be given in decimals like 0.001 and all,.. so MAX volume shows 1 here
+        # Value here is by default 1 it means song will play at MAX volume and Length is value that how much space will it occupy in vertical direction and assigning that value properly to look more perfect
+    volume_slider = ttk.Scale(volume_frame, from_=0, to=1, orient=tk.VERTICAL, value=1, command=Volume, length=200)
+        # PAcking slider in volume_frame
+    volume_slider.pack(pady=10) # Here padded in Y direction so to look more Attractive with spaces above and below of length (10)
 
 
-# Adding "Remove" Option To Main Menu
-remove_songs = tk.Menu(Options_list) # Making a new menu named remove_songs inside Options_list menu
-Options_list.add_cascade(label="Remove", menu=remove_songs) # Allowing to access all contents of remove menu to Options_list 
+    volume_slider_label = tk.Label(mp3, text="0") # Shows initial text = 0
+    volume_slider_label.pack(pady=10)
 
-    # Adding "Remove One Song" Option To "Remove" Menu
-remove_songs.add_command(label="Remove Selected Song", command=remove_song)
+    slider = ttk.Scale(mp3, from_=0, to=100, length=500, orient=tk.HORIZONTAL)
+    slider.pack(side='bottom')
 
-     # Adding "Remove All Songs" Option To "Remove" Menu
-remove_songs.add_command(label="Remove All Songs", command=remove_all_songs)
-
-
-    # Adding About Option To Main Menu
-about = tk.Menu(Options_list)
-about.add_command(label='About', command=About)
-Options_list.add_cascade(label="About", menu=about)
-
-# Adding Help Option To Main Menu
-help1 = tk.Menu(Options_list)
-help1.add_command(label='Help', command=Help)
-Options_list.add_cascade(label="Help", menu=help1)
-
-# Creating Status Bar
-    # Relief is border-type, ipady is internal padding in y
-status_bar = tk.Label(mp3, text='ENJOY MUSIC  ', borderwidth=1, relief=tk.SUNKEN, anchor=tk.E)
-status_bar.pack(fill=tk.X, side=tk.BOTTOM, ipady=3)
-
-# Creating Volume Slider To increase and decrease volume and putting it in volume frame to look more great 
-    # Orienting it in vertical direction 
-    # Did 0 to 1 as volume in pygame will be given in decimals like 0.001 and all,.. so MAX volume shows 1 here
-    # Value here is by default 1 it means song will play at MAX volume and Length is value that how much space will it occupy in vertical direction and assigning that value properly to look more perfect
-volume_slider = ttk.Scale(volume_frame, from_=0, to=1, orient=tk.VERTICAL, value=1, command=Volume, length=200)
-    # PAcking slider in volume_frame
-volume_slider.pack(pady=10) # Here padded in Y direction so to look more Attractive with spaces above and below of length (10)
-
-
-# Create Volume Slider Label to Show Current Volume 
-volume_slider_label = tk.Label(mp3, text="0") # Shows initial text = 0
-volume_slider_label.pack(pady=10)
-
-
-# Entering in event loop and allowing all the data we entered above to appear on screen
-mp3.mainloop()
+    # Entering in event loop and allowing all the data we entered above to appear on screen

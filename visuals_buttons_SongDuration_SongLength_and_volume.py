@@ -209,6 +209,9 @@ def Stop():
     
     
 # Making playlist of songs
+master_frame = tk.Frame(mp3)
+master_frame.pack(pady = 30)# pady means padding in y to make it look properly aligned and attractive (same for padx in x direction so not explaining it everywhere)
+master_frame['bg'] = 'white' 
 
 playlist = tk.Listbox(mp3, bg="orange", fg="White", width=40, selectbackground='DarkGreen')
 playlist.pack(pady=30) # pady means padding in y to make it look properly aligned and attractive (same for padx in x direction so not explaining it everywhere)
@@ -279,7 +282,7 @@ Options_list.add_cascade(label="Help", menu=help1)
 
 # Creating Status Bar
 # Relief is border-type, ipady is internal padding in y
-status_bar = tk.Label(mp3, text=' ENJOY MUSIC  ', borderwidth=1, relief=tk.SUNKEN, anchor=tk.E)
+status_bar = tk.Label(mp3, text='Song Is Being Played   ', borderwidth=1, relief=tk.SUNKEN, anchor=tk.E)
 status_bar.pack(fill=tk.X, side=tk.BOTTOM, ipady=3)
 
 # Entering in event loop and allowing all the data we entered above to appear on screen

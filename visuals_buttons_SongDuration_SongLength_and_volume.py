@@ -282,5 +282,5 @@ status_bar = tk.Label(mp3, text='Song Is Being Played   ', borderwidth=1, relief
 status_bar.pack(fill=tk.X, side=tk.BOTTOM, ipady=3)
 
 
-# Entering in event loop and allowing all the data we entered to appear on screen
+# Entering in event loop and allowing all the data we entered above to appear on screen
 mp3.mainloop()

@@ -41,9 +41,8 @@ def song_time():
     # Now Finding Current Song
     song = playlist.get(tk.ACTIVE) # Grab song title from playlist using ACTIVE that represents current song here
     
-    # Taking Index of song and finding it's corresponding path from songs_list 
-    # 0 to end here represents to search in whole list and scan for given song 
-    
+    # Taking Index of song and finding it's corresponding path from songs_list
+    # Get (0, "end") shows that whole list is being scanned and we are finding for our selected song
     index = playlist.get(0, "end").index(song)
     song = songs_list[index]
     
@@ -72,6 +71,10 @@ def remove_song(): # Removes a selected one
     playlist.delete(tk.ANCHOR)
     # After deleting the song it must stop playing it so we stop the song here (if playing)
     pygame.mixer.music.stop()
+    # Removing selected song from temporary list too
+    cur_song = playlist.get(tk.ANCHOR)
+    index = playlist.get(0, "end").index(cur_song)
+    songs_list.pop(index)
 
 # Defining Remove Many Songs Function in Add Option in Main Menu 
 def remove_all_songs(): # Removes all
@@ -80,6 +83,8 @@ def remove_all_songs(): # Removes all
     playlist.delete(0, tk.END)
     # Stop playing any song (if its playing) 
     pygame.mixer.music.stop()
+    # Removing songs from temporary list too
+    songs_list.clear()
 
 # Defining Add A Song Function in Add Option in Main Menu 
 def add_song():
@@ -218,6 +223,7 @@ def Pause(is_paused):
         pygame.mixer.music.unpause()
         # Changing "Check" Variable's value to False tell "SONG IS UNPAUSED NOW"
         Check = False
+    song_time()
 
     # Defining Forward Button
 def Forward():

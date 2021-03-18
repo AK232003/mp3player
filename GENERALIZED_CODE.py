@@ -6,6 +6,7 @@ from tkinter.messagebox import showinfo
 from tkinter import filedialog
 import time
 import mutagen.mp3
+
 from mutagen.mp3 import MP3
 import tkinter.ttk as ttk
 
@@ -92,7 +93,7 @@ def remove_all_songs(): # Removes all
 def add_song():
     
     # To Open files to select songs from any directory
-    song = filedialog.askopenfilename(title="Select One Song" , filetypes=(("WAV Files", "*.wav"), ))
+    song = filedialog.askopenfilename(title="Select One Song" , filetypes=(("MP3 Files", "*.mp3"), ))
     # Adding one other variable to give our songs whole path to it
     temp_song=song
     global song_list
@@ -103,7 +104,7 @@ def add_song():
     for i in range(len(song)):
         if(song[h]=="/"):
             song = song.replace(song[0:(h+1)], "")
-            song = song.replace(".wav", "")
+            song = song.replace(".mp3", "")
             break
         else:
             h=h-1
@@ -116,7 +117,7 @@ def add_song():
 
 def add_many_songs():
     global song_list
-    songs = filedialog.askopenfilenames(title="Select Many Songs" , filetypes=(("WAV", "*.wav"), ))
+    songs = filedialog.askopenfilenames(title="Select Many Songs" , filetypes=(("MP3", "*.mp3"), ))
     
     # Giving paths of all songs in tuple to a temporary variable so as to access the whole path of any song from anywhere
     temp_songs=songs
@@ -133,7 +134,7 @@ def add_many_songs():
         for i in range(len(song)):
             if(song[h]=="/"):
                 song = song.replace(song[0:(h+1)], "")
-                song = song.replace(".wav", "")
+                song = song.replace(".mp3", "")
                 break
             else:
                 h=h-1

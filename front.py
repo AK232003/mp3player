@@ -1,8 +1,10 @@
 from tkinter import *
 import playlist as pl
 from functools import partial
-import buttonfunc as bf
+import GENERALIZED_CODE as bf
+import pygame
 
+pygame.mixer.init()
 tk=Tk()
 tk.geometry("1200x600")
 tk.title("MP3 PLAYER")
@@ -13,8 +15,8 @@ tk["bg"]="#191414"
 menubar=Menu(tk,bg="#1DB954",bd=1,font=['Verdana',12],activebackground="#1DB954")
 add=Menu(tk,tearoff=0,bg="#40704d",bd=1,font=['Verdana',12],activebackground="#1DB954")
 menubar.add_cascade(label='Add',menu=add)
-add.add_command(label ='Add Song', command = None) 
-add.add_command(label ='Add Songs', command = None) 
+add.add_command(label ='Add Song', command = bf.add_song) 
+add.add_command(label ='Add Songs', command = bf.add_many_songs) 
 
 tk.config(menu = menubar) 
 
@@ -54,28 +56,17 @@ play.grid(row=0, column=1, padx=8)
 pause.grid(row=0, column=2, padx=8)
 stop.grid(row=0, column=3, padx=8)
 
-side_frame=Frame(tk,bg="black",width=200,height=800,relief='sunken', borderwidth=0)
+side_frame=Frame(tk,bg="black",width=300,height=800,relief='sunken', borderwidth=0)
 side_frame.pack(expand=False, fill='y', side='left', anchor='nw')
-pl.cursor.execute("Show tables;") 
-
+pl.cursor.execute("Show tables;")
 myresult = pl.cursor.fetchall()
     
-for i in range(len(myresult)):  
-    b=Button(side_frame,text=myresult[i])#,command=)
+
+
+for i in range(len(myresult)): 
+    b=Button(side_frame,text=myresult[i])#,command=partial(pl.play_playlist,i+1,bf.playlist,tk))
     b.grid(row=i,column=0,padx=8)
 
 
 bf.main(tk)
-
 tk.mainloop()
-
-master_frame = tk.Frame(tk)
-master_frame.pack(pady = 30)# pady means padding in y to make it look properly aligned and attractive (same for padx in x direction so not explaining it everywhere)
-master_frame['bg'] = 'white' # Changing Overall background colour to white of master frame
-
-volume_frame = tk.LabelFrame(master_frame, text="Volume")
-    # Assigning Volume Part next to mp3_frame of Ours using row=0 and col=1
-volume_frame.grid(row=0, column=1, padx=30)
-# Making playlist of songs
-
- # Assigning row and column as 0 as it reprents first element of master _current_frames

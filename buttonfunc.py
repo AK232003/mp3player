@@ -1,4 +1,3 @@
-# Importing all required Modules
 import tkinter as tk
 import pygame
 from tkinter.messagebox import showinfo
@@ -7,11 +6,11 @@ import time
 import mutagen.mp3
 from mutagen.mp3 import MP3
 import tkinter.ttk as ttk
-
-#To start pygame mixer which is used to play music here 
+import playlist as pl
+ 
 pygame.mixer.init()
 
-# Defining Function to Get length and time information about current song
+# Defining Functi to Get length and time information about current song
 def song_time():
     
     # Current Position of song in seconds (Dividing by thousand as default is milliseconds)
@@ -57,21 +56,22 @@ def remove_all_songs(): # Removes all
     # Stop playing any song (if its playing) 
     pygame.mixer.music.stop()
 
+temp_song=[]
 # Defining Add A Song Function in Add Option in Main Menu 
 def add_song():
     
     # To Open files to select songs from any directory
-    song = filedialog.askopenfilename(title="Select One Song" , filetypes=(("MP3 Files", "*.mp3"), ))
-    
+    song = filedialog.askopenfilename(title="Select One Song" , filetypes=(("WAV Files", "*.wav"),))
+    global temp_song
     # Adding one other variable to give our songs whole path to it
-    temp_song=song
+    temp_song.append(song)
     
     # To Remove Extra Stuffs Getting printed While Adding Song Name in Queue
     h=-1
     for i in range(len(song)):
         if(song[h]=="/"):
             song = song.replace(song[0:(h+1)], "")
-            song = song.replace(".mp3", "")
+            song = song.replace(".wav", "")
             break
         else:
             h=h-1
@@ -82,19 +82,11 @@ def add_song():
 # Defining Add Many Songs Function in Add Option in Main Menu 
 
 def add_many_songs():
-    songs = filedialog.askopenfilenames(title="Select Many Songs" , filetypes=(("MP3 Files", "*.mp3"), ))
-    
+    songs = filedialog.askopenfilenames(title="Select Many Songs" , filetypes=(("MP3 Files", "*.wav"),))
+    global temp_song
     # Giving paths of all songs in tuple to a temporary variable so as to access the whole path of any song from anywhere
-    temp_songs=songs
-    
-    
-    # Assigning temporary variable to every song in songs 
-    for temp_song in temp_songs:
-        temp_song=temp_song
-    
-    
+    temp_song+=list(songs)
     # As Add Many Songs Is just Repetiton Of What We Did In Add A Song, We will Do That Things in loop
-    
     for song in songs:
 
         # To Remove Extra Stuffs Getting printed While Adding Song Name in Queue
@@ -102,11 +94,10 @@ def add_many_songs():
         for i in range(len(song)):
             if(song[h]=="/"):
                 song = song.replace(song[0:(h+1)], "")
-                song = song.replace(".mp3", "")
+                song = song.replace(".wav", "")
                 break
             else:
                 h=h-1
-
         # Adding Song To playlist
         playlist.insert(tk.END, song)
         
@@ -150,14 +141,14 @@ def Play():
     song = playlist.get(tk.ACTIVE)
     
     # Adding Extra Part Of Path Of Function As No Song will be played just by its name 
-    song = f'E:/Python_project/Songs/{song}.mp3'
+    for i in range(len(temp_song)):
     
     # Playing song with the help of pygame 
-    pygame.mixer.music.load(song)
-    pygame.mixer.music.play(loops=0)
+        pygame.mixer.music.load(temp_song[i])
+        pygame.mixer.music.play(loops=0)
 
     # Calling song_time function in Play
-    song_time()
+        song_time()
 
 # We here gave Curvol as it shows The Current Volume while we play any song after being loaded
     # Curvol shows Current volume here 
@@ -208,7 +199,6 @@ def Forward():
     song = playlist.get(next_song)
     
     # Adding Extra Part Of Path Of Function As No Song will be played just by its name 
-    song = f'E:/Python_project/Songs/{song}.mp3'
     
     # Now After Selecting The Next Song By Above Steps, We'll Play THE NEXT SONG
     

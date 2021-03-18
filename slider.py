@@ -8,7 +8,7 @@ slider_position = int(song_length)
 song_slider.config(to = slider_position, value = 0) #Whenever new song plays default value should be 0
 
 def song_slide(x):
-    #slider_label.config(text = "{} of {}".format(int(song_slider.get()), int(song_length))) #song_length should be global
+    #song_length should be global
     song = song_box.get(ACTIVE)
 	song = f'C:/gui/audio/{song}.mp3'
     pygame.mixer.music.load(song)

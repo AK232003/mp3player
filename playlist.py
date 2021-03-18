@@ -67,3 +67,20 @@ def playlist_names(func,tk):
         b=Button(newwindow,text=myresult[i],command=partial(func,i,tk)).grid(row=i,column=0,padx=8)
     #newwindow.destroy()
     
+def play_playlist(n,playlist,tk,):
+    cursor.execute("select * from "+str(myresult[n])[2:-3])
+    songs=cursor.fetchall()
+    for song in songs:
+        # To Remove Extra Stuffs Getting printed While Adding Song Name in Queue
+        h=-1
+        for i in range(len(song)):
+            if(song[h]=="/"):
+                song = song.replace(song[0:(h+1)], "")
+                song = song.replace(".wav", "")
+                break
+            else:
+                h=h-1
+
+        # Adding Song To playlist
+        playlist.insert(tk.END, song)
+     

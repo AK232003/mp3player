@@ -54,10 +54,10 @@ def song_time():
 	    slider_position = int(song_len)
 	    song_slider.config(to = slider_position, value = int(song_slider.get()))
 		
-	    converted_current_time = time.strftime('%M:%S', time.gmtime(int(song_slider.get())))
+	    formal_time = time.strftime('%M:%S', time.gmtime(int(song_slider.get())))
 
 		#Status Bar info
-	    status_bar.config(text=f' Song Duration: {converted_current_time}  /  {song_length}')
+	    status_bar.config(text=f' Song Duration: {foral_time}  /  {song_length}')
 
 	    next_time = int(song_slider.get()) + 1
 	    song_slider.config(value = next_time)

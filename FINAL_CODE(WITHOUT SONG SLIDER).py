@@ -41,7 +41,9 @@ def song_time():
     # Now Finding Current Song
     song = playlist.get(tk.ACTIVE) # Grab song title from playlist using ACTIVE that represents current song here
     
-    # Taking Index of song and finding it's corresponding path from songs_list
+    # Taking Index of song and finding it's corresponding path from songs_list 
+    # 0 to end here represents to search in whole list and scan for given song 
+    
     index = playlist.get(0, "end").index(song)
     song = songs_list[index]
     

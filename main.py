@@ -448,7 +448,7 @@ def song_slide(x):
 
 pygame.mixer.init()
 root=tk.Tk()
-root.geometry("1200x600")
+root.geometry("800x400")
 root.title("MP3 PLAYER")
 #icon=tk.PhotoImage(r"icons\MP3.png")
 #root.iconphoto(False,icon)

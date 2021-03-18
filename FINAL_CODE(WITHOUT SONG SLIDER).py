@@ -35,7 +35,7 @@ def song_time():
     # Current Position of song in seconds (Dividing by thousand as default is milliseconds)
     current_time = pygame.mixer.music.get_pos() / 1000 
     
-    # Converting given time to SPECIFIC FORMAT (more formal way H:M:S here)
+    # Converting given time to SPECIFIC FORMAT (more formal way M:S here)
     formal_time = time.strftime('%M:%S', time.gmtime(current_time))
     
     # Now Finding Current Song

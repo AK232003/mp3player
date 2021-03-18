@@ -70,6 +70,10 @@ def remove_song(): # Removes a selected one
     playlist.delete(tk.ANCHOR)
     # After deleting the song it must stop playing it so we stop the song here (if playing)
     pygame.mixer.music.stop()
+    # Removing Selected song from songs_list too i.e. temporary songs list 
+    song = playlist.get(tk.ANCHOR) # To get selected song
+    index = playlist.index(song)
+    songs_list.pop(index)
 
 # Defining Remove Many Songs Function in Add Option in Main Menu 
 def remove_all_songs(): # Removes all
@@ -78,6 +82,8 @@ def remove_all_songs(): # Removes all
     playlist.delete(0, tk.END)
     # Stop playing any song (if its playing) 
     pygame.mixer.music.stop()
+    # Removing All Songs from songs_list too i.e. temporary songs list also must be empty
+    songs_list.clear()
 
 # Defining Add A Song Function in Add Option in Main Menu 
 def add_song():

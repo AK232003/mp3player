@@ -148,7 +148,19 @@ def add_many_songs():
         # Adding Song To playlist
         playlist.insert(tk.END, song)
         
-    
+# Defining Help Button's Function
+
+def Help():
+    # Showinginfo is a command to display written things on Screen inside tkinter.messagebox, whose syntax is (Label, Message to be shown)
+    showinfo("MP3 PLAYER", "Contact ESS112_GROUP-1 For Doubts Related To This Code")   
+
+
+# Defining About Button's Function
+
+def About():
+    # Showinginfo is a command to display written things on Screen inside tkinter.messagebox, whose syntax is (Label, Message to be shown)
+    showinfo("MP3 PLAYER", "MP3 PLAYER by ESS112_GROUP-1")
+
 
     # pos here holds the value that where basically the volume slider is there
 def Volume(pos):
@@ -428,7 +440,7 @@ root["bg"]="#191414"
 menubar=tk.Menu(root,bg="#1DB954",bd=1,font=['Verdana',12],activebackground="#1DB954")
 add=tk.Menu(root,tearoff=0,bg="#40704d",bd=1,font=['Verdana',12],activebackground="#1DB954")
 menubar.add_cascade(label='Add',menu=add)
-add.add_command(label ='Add Song', command = add_song) 
+add.add_command(label ='Add A Song', command = add_song) 
 add.add_command(label ='Add Songs', command = add_many_songs) 
 
 root.config(menu = menubar) 
@@ -436,17 +448,28 @@ root.config(menu = menubar)
 remove_songs = tk.Menu(root,tearoff=0,bg="#40704d",bd=1,font=['Verdana',12],activebackground="#1DB954") # Making a new menu named remove_songs inside Options_list menu
 menubar.add_cascade(label="Remove", menu=remove_songs)
 
-remove_songs.add_command(label="Remove A Song", command=remove_song)
+remove_songs.add_command(label="Remove Selected Song", command=remove_song)
 # Adding "Remove All Songs" Option To "Remove" Menu
 remove_songs.add_command(label="Remove All Songs", command=remove_all_songs)
 
 playlis=tk.Menu(root,tearoff=0,bg="#40704d",bd=1,font=['Verdana',12],activebackground="#1DB954")
 menubar.add_cascade(label='Playlists',menu=playlis)
-playlis.add_command(label ='Create playlist', command = partial(pl.create_playlist,root)) 
+playlis.add_command(label ='Create Playlist', command = partial(pl.create_playlist,root)) 
 playlis.add_command(label ='Add Songs', command = partial(pl.playlist_names,pl.add_songs,root))
-playlis.add_command(label ='Delete Songs',command = partial(pl.playlist_names,pl.delete_song,root))
+playlis.add_command(label ='Delete All Songs',command = partial(pl.playlist_names,pl.delete_song,root))
 playlis.add_command(label ='Delete Playlist',command = partial(pl.playlist_names,pl.delete_playlist,root))
 root.config(menu = menubar) 
+
+# Adding About Option To Main Menu
+about = tk.Menu(root,bg="#1DB954",bd=1,font=['Verdana',12],activebackground="#1DB954)
+about.add_command(label='About', command=About)
+root.add_cascade(label="About", menu=about)
+
+# Adding Help Option To Main Menu
+help1 = tk.Menu(root,bg="#1DB954",bd=1,font=['Verdana',12],activebackground="#1DB954)
+help1.add_command(label='Help', command=Help)
+root.add_cascade(label="Help", menu=help1)
+
 
 button_frame=tk.Frame(root,bg="black")
 button_frame.pack( side = tk.BOTTOM )

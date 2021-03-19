@@ -74,14 +74,14 @@ def remove_song():
     global song_list # Removes a selected one  
     #Also When we delete the songs... then the slider keeps on moving
     stop()  
-    # Removing the Highlighted Song (i.e. here so called ANCHORED SONG)
-    playlist.delete(tk.ANCHOR)
-    # After deleting the song it must stop playing it so we stop the song here (if playing)
-    pygame.mixer.music.stop()
     # Removing Selected song from songs_list too i.e. temporary songs list 
     song = playlist.get(tk.ANCHOR) # To get selected song
     index = playlist.index(song)
     songs_list.pop(index)
+    # Removing the Highlighted Song (i.e. here so called ANCHORED SONG)
+    playlist.delete(tk.ANCHOR)
+    # After deleting the song it must stop playing it so we stop the song here (if playing)
+    pygame.mixer.music.stop()
 
 # Defining Remove Many Songs Function in Add Option in Main Menu 
 def remove_all_songs(): # Removes all

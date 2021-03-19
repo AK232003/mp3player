@@ -39,7 +39,6 @@ def song_time():
     
     song_length = time.strftime('%M:%S', time.gmtime(song_len))    
     # Output time and song length to show on screen using config
-    status_bar.config(text=f" Song Duration: {formal_time}  /  {song_length}  ")
     # Now we want to do this every time our new song starts playing so calling this song_time in play
     # Now updating current_time of song every single second(1000 milliseconds) till it's Playing that is done by after
     # Basically like looping(i.e Calling function every single second till length of song)

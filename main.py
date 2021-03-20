@@ -73,7 +73,7 @@ def song_time():
 def remove_song():
     global song_list # Removes a selected one  
     #Also When we delete the songs... then the slider keeps on moving
-    stop()  
+    Stop()  
     # Removing Selected song from songs_list too i.e. temporary songs list 
     song = playlist.get(tk.ANCHOR) # To get selected song
     index = playlist.index(song)
@@ -87,7 +87,7 @@ def remove_song():
 def remove_all_songs(): # Removes all
     global song_list
     #Also When we delete the songs... then the slider keeps on moving
-    stop()
+    Stop()
     # Passing All Songs(we selected before in playlist) at once to delete using range form (0, till END) 
     playlist.delete(0, tk.END)
     # Stop playing any song (if its playing) 

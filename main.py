@@ -39,7 +39,6 @@ def song_time():
     # Output time and song length to show on screen using config
     # Now we want to do this every time our new song starts playing so calling this song_time in play
     # Now updating current_time of song every single second(1000 milliseconds) till it's Playing that is done by after
-    # Basically like looping(i.e Calling function every single second till length of song)
     current_time += 1 #Because there is difference of 1 between the song position and the slider position
 
     if (int(song_slider.get()) == int(song_len)): #If we are at the end of the song.
@@ -65,6 +64,7 @@ def song_time():
 	    next_time = int(song_slider.get()) + 1
 	    song_slider.config(value = next_time)
     
+    # Basically like looping(i.e Calling function every single second till length of song)
     status_bar.after(1000, song_time)
 
 # Defining Remove A Song Function in Add Option in Main Menu

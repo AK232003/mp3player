@@ -148,6 +148,8 @@ def add_many_songs():
         # Adding Song To playlist
         playlist.insert(tk.END, song)
         
+# Giving Works To Every Buttons 	
+	
 # Defining Help Button's Function
 
 def Help():
@@ -183,13 +185,6 @@ def Volume(x):
     elif int(current_volume) > 75 and int(current_volume) <= 100:
         volumetric_graph.config(image = vol100)
     
-# Given Below Part is used in play but is a part of Volume slider, so added here as comments
-# We here gave Curvol as it shows The Current Volume while we play any song after being loaded
-    # Curvol shows Current volume here 
-    # curvol = pygame.mixer.music.get_volume()
-    # volume_slider_label.config(text=curvol * 100) # Multiplied by 100 as volume by default is shown in floating points using pygame 
-
-# Giving Works To Every Buttons 
 
     # Defining Play Button
 def add_playlist(i):
@@ -239,8 +234,6 @@ def Play():
         volumetric_graph.config(image = vol75)
     elif int(current_volume) > 75 and int(current_volume) <= 100:
         volumetric_graph.config(image = vol100)
-
-    # Calling song_time function in Play
     
 
 # We here gave Curvol as it shows The Current Volume while we play any song after being loaded
@@ -249,7 +242,12 @@ def Play():
     volume_slider_label.config(text=curvol * 100) # Multiplied by 100 as volume by default is shown in floating points using pygame 
     volume_slider_label["bg"]= "red" # Setting Red colour to background where it shows text(volume level)
     volume_slider_label["fg"]= "white" # Setting white colour to text shown 
-
+# Given Below Part is used in play but is a part of Volume slider, so added here as comments
+# We here gave Curvol as it shows The Current Volume while we play any song after being loaded
+    # Curvol shows Current volume here 
+    # curvol = pygame.mixer.music.get_volume()
+    # volume_slider_label.config(text=curvol * 100) # Multiplied by 100 as volume by default is shown in floating points using pygame 	
+	
 # Create Check Variable To Check Whether A Song Is Running Or Not
 global Check
 Check = False
@@ -334,11 +332,11 @@ def Back():
     playlist.selection_clear(0, tk.END)
     playlist.selection_set(previous_song, last=None)
 
-    # Defining Stop Button\
 #Also create a stop global variable so that we can use it later on...
 global stop 
 stop = False
 
+# Defining Stop button
 def Stop():
     #Above stop func def
     global stop
@@ -442,6 +440,7 @@ root.config(menu = menubar)
 remove_songs = tk.Menu(root,tearoff=0,bg="#40704d",bd=1,font=['Verdana',12],activebackground="#1DB954") # Making a new menu named remove_songs inside Options_list menu
 menubar.add_cascade(label="Remove", menu=remove_songs)
 
+# Adding "Remove Selected Song" Option To "Remove" Menu
 remove_songs.add_command(label="Remove Selected Song", command=remove_song)
 # Adding "Remove All Songs" Option To "Remove" Menu
 remove_songs.add_command(label="Remove All Songs", command=remove_all_songs)
@@ -496,6 +495,6 @@ for i in range(len(myresult)):
     b=tk.Button(side_frame,text=myresult[i],command=partial(add_playlist,i))
     b.grid(row=i,column=0,padx=8)
 
+#Entering into the event loop... and allowing all the data we entered above to appear on the screen.		
 main(root)
 root.mainloop()
-#Entering into the event loop... and allowing all the data we entered above to appear on the screen.

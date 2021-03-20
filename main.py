@@ -8,8 +8,6 @@ import time
 import mutagen.mp3
 from mutagen.mp3 import MP3
 import tkinter.ttk as ttk
-import random
-from pygame.constants import K_PRINTSCREEN
 import playlist as pl
 from functools import partial
 

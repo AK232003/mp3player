@@ -55,15 +55,15 @@ def song_time():
 	    song_slider.config(to = slider_position, value = int(current_time))
     
     else: 
-        #If the slider has moved... sync the song
+            #If the slider has moved... sync the song
 	    slider_position = int(song_len)
 	    song_slider.config(to = slider_position, value = int(song_slider.get()))
 		
 	    converted_current_time = time.strftime('%M:%S', time.gmtime(int(song_slider.get())))
 
-		#Status Bar info
+	    #Status Bar info
 	    status_bar.config(text=f' Song Duration: {converted_current_time}  /  {song_length}')
-
+	    #To keep things moving....
 	    next_time = int(song_slider.get()) + 1
 	    song_slider.config(value = next_time)
     

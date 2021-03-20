@@ -390,8 +390,6 @@ def main(mp3):
     vol75 = tk.PhotoImage(file = 'icons/volume75.png')
     vol100 = tk.PhotoImage(file = 'icons/volume100.png')
 
-    # Defining button images of our mp3 player 
-
 
 
     # Creating Volume Label Frame To Add Volume Slider here to make it look attractive in box and putting volume_frame in master_frame
@@ -426,7 +424,6 @@ def main(mp3):
     volume_slider_label = tk.Label(mp3, text="0") # Shows initial text = 0
     volume_slider_label.pack(pady=10)
 
-pygame.mixer.init()
 root=tk.Tk()
 root.geometry("800x500")
 root.title("MP3 PLAYER")
@@ -470,7 +467,7 @@ root.add_cascade(label="Help", menu=help1)
 
 button_frame=tk.Frame(root,bg="black")
 button_frame.pack( side = tk.BOTTOM )
-
+# Defining button images of our mp3 player 
 forward_image = tk.PhotoImage(file=r"icons\resized\fast-forward-button.png")
 back_image = tk.PhotoImage(file=r"icons\resized\rewind.png")
 stop_image = tk.PhotoImage(file=r"icons\resized\stop-button.png")

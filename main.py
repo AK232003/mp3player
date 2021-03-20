@@ -146,22 +146,7 @@ def add_many_songs():
         playlist.insert(tk.END, song)
         
 # Giving Works To Every Buttons 	
-	
-# Defining Help Button's Function
-
-def Help():
-    # Showinginfo is a command to display written things on Screen inside tkinter.messagebox, whose syntax is (Label, Message to be shown)
-    showinfo("MP3 PLAYER", "Contact ESS112_GROUP-1 For Doubts Related To This Code")   
-
-
-# Defining About Button's Function
-
-def About():
-    # Showinginfo is a command to display written things on Screen inside tkinter.messagebox, whose syntax is (Label, Message to be shown)
-    showinfo("MP3 PLAYER", "MP3 PLAYER by ESS112_GROUP-1")
-
-
-    # x here holds the value that where basically the volume slider is there
+# x here holds the value that where basically the volume slider is there
 def Volume(x):
     # Using this command we can increase volume from above to down 
     # MAX value at Bottom is 1 and Above is 0

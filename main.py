@@ -353,6 +353,16 @@ def Stop():
     
     # Clearing Status_Bar by writing nothing inside it as, when we use stop as no song will be played after it
     status_bar.config(text=" ")
+
+def song_slide(x):
+    #song_length should be global
+    song = playlist.get(tk.ACTIVE)
+    for i in songs_list:
+        if song in i:
+            song=i
+
+    pygame.mixer.music.load(song)
+    pygame.mixer.music.play(loops = 0, start = int(song_slider.get()))
     
    
 #Creating Master Frame in which our frame (including all buttons and status toolbar, header ) and volume slider will be there
@@ -366,6 +376,7 @@ def main(mp3):
     master_frame = tk.Frame(mp3)
     master_frame.pack(pady = 30)# pady means padding in y to make it look properly aligned and attractive (same for padx in x direction so not explaining it everywhere)
     master_frame['bg'] = 'white' # Changing Overall background colour to white of master frame
+    #Making the playlist of the songs...
     playlist = tk.Listbox(master_frame, bg="orange", fg="White", width=50, selectbackground='DarkGreen') # Putting our playlist in Master frame
     playlist.grid(row=0, column=0) # Assigning row and column as 0 as it reprents first element of master _current_frames
     global vol0
@@ -414,20 +425,6 @@ def main(mp3):
     # Create Volume Slider Label to Show Current Volume 
     volume_slider_label = tk.Label(mp3, text="0") # Shows initial text = 0
     volume_slider_label.pack(pady=10)
-
-    # Entering in event loop and allowing all the data we entered above to appear on screen
-
-def song_slide(x):
-    #song_length should be global
-    song = playlist.get(tk.ACTIVE)
-    for i in songs_list:
-        if song in i:
-            song=i
-
-    song = f'{song}'
-    pygame.mixer.music.load(song)
-    pygame.mixer.music.play(loops = 0, start = int(song_slider.get()))
-    # Making playlist of songs
 
 pygame.mixer.init()
 root=tk.Tk()
@@ -504,3 +501,4 @@ for i in range(len(myresult)):
 
 main(root)
 root.mainloop()
+#Entering into the event loop... and allowing all the data we entered above to appear on the screen.

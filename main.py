@@ -162,8 +162,8 @@ def About():
     showinfo("MP3 PLAYER", "MP3 PLAYER by ESS112_GROUP-1")
 
 
-    # pos here holds the value that where basically the volume slider is there
-def Volume(pos):
+    # x here holds the value that where basically the volume slider is there
+def Volume(x):
     # Using this command we can increase volume from above to down 
     # MAX value at Bottom is 1 and Above is 0
     pygame.mixer.music.set_volume(volume_slider.get()) 

@@ -45,12 +45,12 @@ def song_time():
     current_time += 1 #Because there is difference of 1 between the song position and the slider position
 
     if (int(song_slider.get()) == int(song_len)): #If we are at the end of the song.
-        status_bar.config(text = f" Song Duration: {song_length}  /  {song_length}")#At the last second to update the label)    elif Check :
+        status_bar.config(text = f" Song Duration: {song_length}  /  {song_length}")#At the last second to update the label
          
     elif Check==True:
 	    pass     #Rest of the elif and else statements would not execute.
 
-    elif int(song_slider.get()) == int(current_time):
+    elif int(song_slider.get()) == int(current_time):#Slider hasnt moved...
 	    slider_position = int(song_len)
 	    song_slider.config(to = slider_position, value = int(current_time))
     

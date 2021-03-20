@@ -291,7 +291,7 @@ def Forward():
     # Making Appear(Activating) Selection Line On Next Song After clearing it from current song
     playlist.activate(next_song) # This Will just move underline from current song to next song
     
-    # Here, we did last = none means it says we are not highlighting more than one thing in list and just ending highlighting in one element only
+    # Here, we did last = none means it says we are not highlighting more than one thing in list and just ending highlighting the selected song only
     playlist.selection_set(next_song, last=None) # This will move highlighter to next song
     
     

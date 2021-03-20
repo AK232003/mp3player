@@ -13,7 +13,7 @@ from pygame.constants import K_PRINTSCREEN
 import playlist as pl
 from functools import partial
 
- 
+# Initializing pygame mixer 
 pygame.mixer.init()
 songs_list=[]
 

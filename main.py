@@ -186,7 +186,6 @@ def Volume(x):
         volumetric_graph.config(image = vol100)
     
 
-    # Defining Play Button
 def add_playlist(i):
     global songs_list
     songs_list+=pl.play_playlist(i)
@@ -201,7 +200,7 @@ def add_playlist(i):
             else:
                 h=h-1
         playlist.insert(tk.END, song)
-
+# Defining Play Button
 def Play():
     global song_list
     #In play func...

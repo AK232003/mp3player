@@ -8,11 +8,8 @@ import time
 import mutagen.mp3
 from mutagen.mp3 import MP3
 import tkinter.ttk as ttk
-import random
-from pygame.constants import K_PRINTSCREEN
 import playlist as pl
 from functools import partial
-
  
 pygame.mixer.init()
 songs_list=[]
@@ -39,32 +36,31 @@ def song_time():
     
     song_length = time.strftime('%M:%S', time.gmtime(song_len))    
     # Output time and song length to show on screen using config
-    status_bar.config(text=f" Song Duration: {formal_time}  /  {song_length}  ")
     # Now we want to do this every time our new song starts playing so calling this song_time in play
     # Now updating current_time of song every single second(1000 milliseconds) till it's Playing that is done by after
     # Basically like looping(i.e Calling function every single second till length of song)
     current_time += 1 #Because there is difference of 1 between the song position and the slider position
 
     if (int(song_slider.get()) == int(song_len)): #If we are at the end of the song.
-        status_bar.config(text = f" Song Duration: {song_length}  /  {song_length}")#At the last second to update the label)    elif Check :
+        status_bar.config(text = f" Song Duration: {song_length}  /  {song_length}")#At the last second to update the label
          
     elif Check==True:
 	    pass     #Rest of the elif and else statements would not execute.
 
-    elif int(song_slider.get()) == int(current_time):
+    elif int(song_slider.get()) == int(current_time):#Slider hasnt moved...
 	    slider_position = int(song_len)
 	    song_slider.config(to = slider_position, value = int(current_time))
     
     else: 
-        #If the slider has moved... sync the song
+            #If the slider has moved... sync the song
 	    slider_position = int(song_len)
 	    song_slider.config(to = slider_position, value = int(song_slider.get()))
 		
 	    converted_current_time = time.strftime('%M:%S', time.gmtime(int(song_slider.get())))
 
-		#Status Bar info
+	    #Status Bar info
 	    status_bar.config(text=f' Song Duration: {converted_current_time}  /  {song_length}')
-
+	    #To keep things moving....
 	    next_time = int(song_slider.get()) + 1
 	    song_slider.config(value = next_time)
     
@@ -74,21 +70,21 @@ def song_time():
 def remove_song():
     global song_list # Removes a selected one  
     #Also When we delete the songs... then the slider keeps on moving
-    stop()  
-    # Removing the Highlighted Song (i.e. here so called ANCHORED SONG)
-    playlist.delete(tk.ANCHOR)
-    # After deleting the song it must stop playing it so we stop the song here (if playing)
-    pygame.mixer.music.stop()
+    Stop()  
     # Removing Selected song from songs_list too i.e. temporary songs list 
     song = playlist.get(tk.ANCHOR) # To get selected song
     index = playlist.index(song)
     songs_list.pop(index)
+    # Removing the Highlighted Song (i.e. here so called ANCHORED SONG)
+    playlist.delete(tk.ANCHOR)
+    # After deleting the song it must stop playing it so we stop the song here (if playing)
+    pygame.mixer.music.stop()
 
 # Defining Remove Many Songs Function in Add Option in Main Menu 
 def remove_all_songs(): # Removes all
     global song_list
     #Also When we delete the songs... then the slider keeps on moving
-    stop()
+    Stop()
     # Passing All Songs(we selected before in playlist) at once to delete using range form (0, till END) 
     playlist.delete(0, tk.END)
     # Stop playing any song (if its playing) 
@@ -149,28 +145,13 @@ def add_many_songs():
         # Adding Song To playlist
         playlist.insert(tk.END, song)
         
-    
-        
+# Giving Works To Every Buttons 	
+	
 # Defining Help Button's Function
 
-def Help():
-    # Showinginfo is a command to display written things on Screen inside tkinter.messagebox, whose syntax is (Label, Message to be shown)
-    showinfo("MP3 PLAYER", "Contact ESS112_GROUP-1 For Doubts Related To This Code")   
 
-
-# Defining About Button's Function
-
-def About():
-    # Showinginfo is a command to display written things on Screen inside tkinter.messagebox, whose syntax is (Label, Message to be shown)
-    showinfo("MP3 PLAYER", "MP3 PLAYER by ESS112_GROUP-1")
-
-
-# Defining Volume Function to do it's work
-
-# To See The level Of Volume Stretch from below or MP3 Player to see volume there 
-
-    # pos here holds the value that where basically the volume slider is there
-def Volume(pos):
+    # x here holds the value that where basically the volume slider is there
+def Volume(x):
     # Using this command we can increase volume from above to down 
     # MAX value at Bottom is 1 and Above is 0
     pygame.mixer.music.set_volume(volume_slider.get()) 
@@ -190,18 +171,13 @@ def Volume(pos):
     elif int(current_volume) > 75 and int(current_volume) <= 100:
         volumetric_graph.config(image = vol100)
     
-# Given Below Part is used in play but is a part of Volume slider, so added here as comments
-# We here gave Curvol as it shows The Current Volume while we play any song after being loaded
-    # Curvol shows Current volume here 
-    # curvol = pygame.mixer.music.get_volume()
-    # volume_slider_label.config(text=curvol * 100) # Multiplied by 100 as volume by default is shown in floating points using pygame 
-
-# Giving Works To Every Buttons 
 
     # Defining Play Button
 def add_playlist(i):
     global songs_list
-    songs_list+=pl.play_playlist(i)
+    songs=pl.play_playlist(i)
+    for i in songs:
+        songs_list.append(i)
     for song in songs_list:
         # To Remove Extra Stuffs Getting printed While Adding Song Name in Queue
         h=-1
@@ -213,13 +189,6 @@ def add_playlist(i):
             else:
                 h=h-1
         playlist.insert(tk.END, song)
-
-"""def shuffle():
-    global songs_list
-    global song
-    stop=False
-    lenth=len(songs_list)
-    """
 
 def Play():
     global song_list
@@ -253,8 +222,6 @@ def Play():
         volumetric_graph.config(image = vol75)
     elif int(current_volume) > 75 and int(current_volume) <= 100:
         volumetric_graph.config(image = vol100)
-
-    # Calling song_time function in Play
     
 
 # We here gave Curvol as it shows The Current Volume while we play any song after being loaded
@@ -263,7 +230,12 @@ def Play():
     volume_slider_label.config(text=curvol * 100) # Multiplied by 100 as volume by default is shown in floating points using pygame 
     volume_slider_label["bg"]= "red" # Setting Red colour to background where it shows text(volume level)
     volume_slider_label["fg"]= "white" # Setting white colour to text shown 
-
+# Given Below Part is used in play but is a part of Volume slider, so added here as comments
+# We here gave Curvol as it shows The Current Volume while we play any song after being loaded
+    # Curvol shows Current volume here 
+    # curvol = pygame.mixer.music.get_volume()
+    # volume_slider_label.config(text=curvol * 100) # Multiplied by 100 as volume by default is shown in floating points using pygame 	
+	
 # Create Check Variable To Check Whether A Song Is Running Or Not
 global Check
 Check = False
@@ -348,11 +320,11 @@ def Back():
     playlist.selection_clear(0, tk.END)
     playlist.selection_set(previous_song, last=None)
 
-    # Defining Stop Button\
 #Also create a stop global variable so that we can use it later on...
 global stop 
 stop = False
 
+# Defining Stop button
 def Stop():
     #Above stop func def
     global stop
@@ -367,6 +339,16 @@ def Stop():
     
     # Clearing Status_Bar by writing nothing inside it as, when we use stop as no song will be played after it
     status_bar.config(text=" ")
+
+def song_slide(x):
+    #song_length should be global
+    song = playlist.get(tk.ACTIVE)
+    for i in songs_list:
+        if song in i:
+            song=i
+
+    pygame.mixer.music.load(song)
+    pygame.mixer.music.play(loops = 0, start = int(song_slider.get()))
     
    
 #Creating Master Frame in which our frame (including all buttons and status toolbar, header ) and volume slider will be there
@@ -380,6 +362,7 @@ def main(mp3):
     master_frame = tk.Frame(mp3)
     master_frame.pack(pady = 30)# pady means padding in y to make it look properly aligned and attractive (same for padx in x direction so not explaining it everywhere)
     master_frame['bg'] = 'white' # Changing Overall background colour to white of master frame
+    #Making the playlist of the songs...
     playlist = tk.Listbox(master_frame, bg="orange", fg="White", width=50, selectbackground='DarkGreen') # Putting our playlist in Master frame
     playlist.grid(row=0, column=0) # Assigning row and column as 0 as it reprents first element of master _current_frames
     global vol0
@@ -392,8 +375,6 @@ def main(mp3):
     vol50 = tk.PhotoImage(file = 'icons/volume50.png')
     vol75 = tk.PhotoImage(file = 'icons/volume75.png')
     vol100 = tk.PhotoImage(file = 'icons/volume100.png')
-
-    # Defining button images of our mp3 player 
 
 
 
@@ -418,7 +399,7 @@ def main(mp3):
     volume_slider.pack(pady=10) # Here padded in Y direction so to look more Attractive with spaces above and below of length (10)
 
     song_slider = ttk.Scale(master_frame, from_=0, to=100, orient=tk.HORIZONTAL, value=0, command=song_slide, length=360)
-    song_slider.grid(row=2, column=0, pady=10)
+    song_slider.grid(row=2, column=0, pady=0)
     
     #To display these graphs
     global volumetric_graph 
@@ -429,26 +410,8 @@ def main(mp3):
     volume_slider_label = tk.Label(mp3, text="0") # Shows initial text = 0
     volume_slider_label.pack(pady=10)
 
-
-    # Entering in event loop and allowing all the data we entered above to appear on screen
-
-
-def song_slide(x):
-    #song_length should be global
-   
-    song = playlist.get(tk.ACTIVE)
-    for i in songs_list:
-        if song in i:
-            song=i
-
-    song = f'{song}'
-    pygame.mixer.music.load(song)
-    pygame.mixer.music.play(loops = 0, start = int(song_slider.get()))
-    # Making playlist of songs
-
-pygame.mixer.init()
 root=tk.Tk()
-root.geometry("800x400")
+root.geometry("800x500")
 root.title("MP3 PLAYER")
 #icon=tk.PhotoImage(r"icons\MP3.png")
 #root.iconphoto(False,icon)
@@ -457,7 +420,7 @@ root["bg"]="#191414"
 menubar=tk.Menu(root,bg="#1DB954",bd=1,font=['Verdana',12],activebackground="#1DB954")
 add=tk.Menu(root,tearoff=0,bg="#40704d",bd=1,font=['Verdana',12],activebackground="#1DB954")
 menubar.add_cascade(label='Add',menu=add)
-add.add_command(label ='Add Song', command = add_song) 
+add.add_command(label ='Add A Song', command = add_song) 
 add.add_command(label ='Add Songs', command = add_many_songs) 
 
 root.config(menu = menubar) 
@@ -465,21 +428,24 @@ root.config(menu = menubar)
 remove_songs = tk.Menu(root,tearoff=0,bg="#40704d",bd=1,font=['Verdana',12],activebackground="#1DB954") # Making a new menu named remove_songs inside Options_list menu
 menubar.add_cascade(label="Remove", menu=remove_songs)
 
-remove_songs.add_command(label="Remove A Song", command=remove_song)
+# Adding "Remove Selected Song" Option To "Remove" Menu
+remove_songs.add_command(label="Remove Selected Song", command=remove_song)
 # Adding "Remove All Songs" Option To "Remove" Menu
 remove_songs.add_command(label="Remove All Songs", command=remove_all_songs)
 
 playlis=tk.Menu(root,tearoff=0,bg="#40704d",bd=1,font=['Verdana',12],activebackground="#1DB954")
 menubar.add_cascade(label='Playlists',menu=playlis)
-playlis.add_command(label ='Create playlist', command = partial(pl.create_playlist,root)) 
+playlis.add_command(label ='Create Playlist', command = partial(pl.create_playlist,root)) 
 playlis.add_command(label ='Add Songs', command = partial(pl.playlist_names,pl.add_songs,root))
-playlis.add_command(label ='Delete Songs',command = partial(pl.playlist_names,pl.delete_song,root))
+playlis.add_command(label ='Delete All Songs',command = partial(pl.playlist_names,pl.delete_song,root))
 playlis.add_command(label ='Delete Playlist',command = partial(pl.playlist_names,pl.delete_playlist,root))
 root.config(menu = menubar) 
 
+
+
 button_frame=tk.Frame(root,bg="black")
 button_frame.pack( side = tk.BOTTOM )
-
+# Defining button images of our mp3 player 
 forward_image = tk.PhotoImage(file=r"icons\resized\fast-forward-button.png")
 back_image = tk.PhotoImage(file=r"icons\resized\rewind.png")
 stop_image = tk.PhotoImage(file=r"icons\resized\stop-button.png")
@@ -508,6 +474,6 @@ for i in range(len(myresult)):
     b=tk.Button(side_frame,text=myresult[i],command=partial(add_playlist,i))
     b.grid(row=i,column=0,padx=8)
 
-
+#Entering into the event loop... and allowing all the data we entered above to appear on the screen.		
 main(root)
 root.mainloop()

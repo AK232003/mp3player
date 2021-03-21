@@ -7,7 +7,7 @@ Our Group includes
 3. Arya Kondwar
 4. Arin Awasti
 5. Karanveer Singh
-   
+
 We were inspired to do this project as now-a-days people want to learn something new and from basic level, so to teach them we made this MP3 PLAYER.
 Also, people will ENJOY Listening to music on MP3 PLAYER Made by them own.
 

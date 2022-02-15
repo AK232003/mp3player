@@ -4,7 +4,7 @@ Each and evry thing is explained in detail in comments, so must refer to it once
 Our Group includes 
 1. Heet Vasani
 2. Shubhanshu Agrawal
-3. Arya Kondwar
+3. Arya Kondawar
 4. Arin Awasti
 5. Karanveer Singh
 
